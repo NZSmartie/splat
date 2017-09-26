@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Globalization;
 using System.Text;
 using System.Threading;
-using System.Diagnostics;
 using System.Diagnostics.Contracts;
 
 namespace Splat
@@ -152,18 +151,6 @@ namespace Splat
         public void Write(string message, LogLevel logLevel) {}
         public LogLevel Level { get; set; }
     }
-
-    public class DebugLogger : ILogger
-    {
-        public void Write(string message, LogLevel logLevel)
-        {
-            if ((int)logLevel < (int)Level) return;
-            Debug.WriteLine(message);
-        }
-
-        public LogLevel Level { get; set; }
-    }
-
 
     /*    
      * LogHost / Logging Mixin

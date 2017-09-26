@@ -65,6 +65,7 @@
     <Compile Include="RectangleExtensions.cs" />
     <Compile Include="ServiceLocation.cs" />
     <Compile Include="SizeExtensions.cs" />
+    <Compile Include="DebugLogger.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="MemoizingMRUCache.cs" />
     <Compile Include="Colors\Color.cs" />
