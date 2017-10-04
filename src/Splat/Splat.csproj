@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <PackageTargetFallback>portable-net45+win+wpa81+wp80</PackageTargetFallback>
+    
+    <!--Disable .Net Standarrd from auto generating AssemblyInfo-->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugType>full</DebugType>
+    <DefineConstants>DEBUG;TRACE;PORTABLE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--Remove project.json and project.lock.json files--> 
+    <None Remove="*project.json;*project.lock.json" />
+
+    <Compile Include="..\CommonAssemblyInfo.cs" />
+    
+    <!--Remove platform specific files-->
+    <None Remove="Android/**/*;Cocoa/**/*;WinForms/**/*;WinRT/**/*;Xaml/**/*;Resources/**/*" />
+    <Compile Remove="Android/**/*;Cocoa/**/*;WinForms/**/*;WinRT/**/*;Xaml/**/*;Resources/**/*" />
+    <!--Manually remove platform specific files-->
+    <Compile Remove="TypeForwardedSystemDrawing.cs;PlatformModeDetector.cs" />
+  </ItemGroup>
+
+  <!--.Net Standard v1.1 dependencies-->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
+    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1" />
+    <PackageReference Include="NETStandard.Library" Version="1.6.0" />
+    <PackageReference Include="System.Diagnostics.Contracts" Version="4.0.1" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.1.1" />
+  </ItemGroup>
+  
+</Project>
