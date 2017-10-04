@@ -24,10 +24,14 @@
     <Compile Include="..\CommonAssemblyInfo.cs" />
 
     <!--Remove platform specific files-->
-    <None Remove="Android/**/*;Cocoa/**/*;WinForms/**/*;WinRT/**/*;Xaml/**/*;Resources/**/*" />
     <Compile Remove="Android/**/*;Cocoa/**/*;WinForms/**/*;WinRT/**/*;Xaml/**/*;Resources/**/*" />
-    <!--Manually remove platform specific files-->
+    <!--but don't hide them from Solution Explorer-->
+    <None Include="Android/**/*;Cocoa/**/*;WinForms/**/*;WinRT/**/*;Xaml/**/*;Resources/**/*" />
+    
+    <!--Remove individual platform specific files-->
     <Compile Remove="TypeForwardedSystemDrawing.cs;PlatformModeDetector.cs" />
+    <!--but don't hide them from Solution Explorer-->
+    <None Include="TypeForwardedSystemDrawing.cs;PlatformModeDetector.cs" />
   </ItemGroup>
 
   <!--.Net 4.5 specific files-->
