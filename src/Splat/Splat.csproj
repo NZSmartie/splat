@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFrameworks>netstandard1.1;net45</TargetFrameworks>
     <PackageTargetFallback>portable-net45+win+wpa81+wp80</PackageTargetFallback>
     
     <!--Disable .Net Standarrd from auto generating AssemblyInfo-->
@@ -22,7 +22,7 @@
     <None Remove="*project.json;*project.lock.json" />
 
     <Compile Include="..\CommonAssemblyInfo.cs" />
-    
+
     <!--Remove platform specific files-->
     <None Remove="Android/**/*;Cocoa/**/*;WinForms/**/*;WinRT/**/*;Xaml/**/*;Resources/**/*" />
     <Compile Remove="Android/**/*;Cocoa/**/*;WinForms/**/*;WinRT/**/*;Xaml/**/*;Resources/**/*" />
@@ -30,12 +30,34 @@
     <Compile Remove="TypeForwardedSystemDrawing.cs;PlatformModeDetector.cs" />
   </ItemGroup>
 
+  <!--.Net 4.5 specific files-->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Compile Include="TypeForwardedSystemDrawing.cs;PlatformModeDetector.cs" />
+    <Compile Remove="Colors/**/*;Points/**/*" />
+  </ItemGroup>
+
   <!--.Net Standard v1.1 dependencies-->
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1" />
-    <PackageReference Include="NETStandard.Library" Version="1.6.0" />
     <PackageReference Include="System.Diagnostics.Contracts" Version="4.0.1" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.1.1" />
   </ItemGroup>
+
+  <!--.Net 4.5 dependencies-->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
   
+
 </Project>
